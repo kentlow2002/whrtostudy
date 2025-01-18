@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from PIL import Image
 from streamlit.components.v1 import html
+from db import get_all_data
 
 # Hardcoded database of study spots
 data = [
@@ -38,6 +39,8 @@ data = [
     }
 ]
 
+data = data + get_all_data()
+
 # Convert data to a pandas DataFrame
 df = pd.DataFrame(data)
 
@@ -62,4 +65,4 @@ for i in range(len(name_list)):
     if button:
         global selected_spot_name
         selected_spot_name = name_list[i]
-        st.switch_page("pages/page.py")
+        #st.switch_page("pages/page.py")
