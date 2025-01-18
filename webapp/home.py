@@ -2,18 +2,6 @@ import streamlit as st
 import pandas as pd
 from PIL import Image
 from streamlit.components.v1 import html
-from dotenv import load_dotenv
-import os
-
-# Load environment variables from .env
-load_dotenv()
-
-# Fetch variables
-USER = os.getenv("user")
-PASSWORD = os.getenv("password")
-HOST = os.getenv("host")
-PORT = os.getenv("port")
-DBNAME = os.getenv("dbname")
 
 # Hardcoded database of study spots
 data = [
@@ -50,48 +38,6 @@ data = [
     }
 ]
 
-# Connect to the database
-try:
-    connection = psycopg2.connect(
-        user=USER,
-        password=PASSWORD,
-        host=HOST,
-        port=PORT,
-        dbname=DBNAME
-    )
-    print("Connection successful!")
-    
-    # Create a cursor to execute SQL queries
-    cursor = connection.cursor()
-    
-    # Example query
-    cursor.execute("SELECT * FROM places")
-    result = cursor.fetchmany(5)
-    print(result)
-    for row in result:
-        data.append({})
-        data[-1]['Name'] = row[2]
-        data[-1]['FullAddress'] = row[3]
-        data[-1]['CurrentUsers'] = row[4]
-        data[-1]['Capacity'] = row[5]
-        data[-1]['LatLng'] = str(row[6]) +', ' + str(row[7])
-        data[-1]['Facilities'] = ""
-        if row[8] == True:
-            data[-1]['Facilities'] += "WiFi"
-        if row[9] == True:
-            data[-1]['Facilities'] += "Toilets"
-        if row[10] == True:
-            data[-1]['Facilities'] += "Charging ports"
-
-
-    # Close the cursor and connection
-    cursor.close()
-    connection.close()
-    print("Connection closed.")
-
-except Exception as e:
-    print(f"Failed to connect: {e}")
-
 # Convert data to a pandas DataFrame
 df = pd.DataFrame(data)
 
@@ -99,7 +45,8 @@ df = pd.DataFrame(data)
 st.title("Study Spots in Singapore")
 
 # Sidebar for navigation and search
-st.title("Navigation")
+st.title("Welcome to WhrStudy!")
+st.subheader("made by Kabil, Kent & Michell")
 search_query = st.text_input("Search for a study spot")
 
 # Filter study spots based on search query
@@ -112,14 +59,7 @@ else:
 name_list = filtered_df["Name"].tolist()
 for i in range(len(name_list)):
     button = st.button(f"{name_list[i]}",key=i)
-    if button:
-        selected_spot_name = name_list[i]
-        break
-
-#Use Session State to manage user count
-if "study_spots" not in st.session_state:
-    st.session_state.study_spots = df.copy()
-if "counter" not in st.session_state:
-    st.session_state.counter = True
-
-st.switch_page(f"pages/page.py")
+if button:
+    global selected_spot_name
+    selected_spot_name = name_list[i]
+    st.switch_page("pages/page.py")
