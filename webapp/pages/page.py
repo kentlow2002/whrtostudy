@@ -5,6 +5,12 @@ from streamlit.components.v1 import html
 #from home import *
 import settings
 
+st.set_page_config(
+    page_title="Studying here?",
+    page_icon=":books:",
+    layout="centered",
+    initial_sidebar_state="collapsed"
+)
 
 if "counter" not in st.session_state:
     st.session_state.counter = True
@@ -29,14 +35,16 @@ def display_study_spot(spot):
         <div style='display: flex; overflow-x: auto; gap: 10px;'>
         """
         for image_url in spot["Images"]:
-            carousel_html += f"<div style='min-width: 300px;'><img src='{image_url}' alt='Image' style='width: 100%; border: 1px solid #ddd; border-radius: 4px;'></div>"
+            carousel_html += f"""<div style='min-width: 300px; height: 200px; overflow: hidden; display: flex; align-items: center; justify-content: center;'>
+            <img src='{image_url}' alt='Image' style='width: auto; height: 100%; border: 1px solid #ddd; border-radius: 4px; object-fit: cover;'>
+        </div>"""
         carousel_html += "</div>"
         html(carousel_html, height=300)
 
     # Interactive buttons for user presence
     col1, col2 = st.columns(2)
     with col1:
-        if st.button(f"I am here! ({spot['Name']})"):
+        if st.button(f"I am here @ {spot['Name']}!"):
             # Update the number of current users
             index = st.session_state.study_spots[
                 st.session_state.study_spots["Name"] == spot["Name"]
@@ -49,7 +57,7 @@ def display_study_spot(spot):
             else:
                 st.error("Please stop spamming!")
     with col2:
-        if st.button(f"I'm leaving ({spot['Name']})"):
+        if st.button(f"I'm leaving {spot['Name']}"):
             index = st.session_state.study_spots[
                 st.session_state.study_spots["Name"] == spot["Name"]
             ].index[0]
