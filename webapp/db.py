@@ -103,6 +103,8 @@ def push_seat(spot_name):
     except Exception as e:
         print(f"Failed to connect: {e}")
 
+    return newCount
+
 def pull_seat(spot_name):
 
     data = []
@@ -146,4 +148,5 @@ def pull_seat(spot_name):
     except Exception as e:
         print(f"Failed to connect: {e}")
 
+    return newCount
           
