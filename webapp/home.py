@@ -3,6 +3,7 @@ import pandas as pd
 from PIL import Image
 from streamlit.components.v1 import html
 import settings
+from db import get_all_data
 
 # Hardcoded database of study spots
 data = [
@@ -39,16 +40,18 @@ data = [
     }
 ]
 
+data = data + get_all_data()
+
 # Convert data to a pandas DataFrame
 df = pd.DataFrame(data)
 # Streamlit app
 st.title("Study Spots in Singapore")
 
 # Sidebar for navigation and search
-st.title("Welcome to WhrStudy!")
-st.subheader("made by Kabil, Kent & Michell")
-search_query = st.text_input("Search for a study spot")
-
+st.title("Welcome to :red[WhrtoStudy] 📚")
+st.header("Find places to study in Singapore! 😎")
+st.subheader("Ready to look for a study spot? 👇")
+search_query = st.text_input("",placeholder="Search for a study spot", label_visibility="collapsed")
 # Filter study spots based on search query
 if search_query:
     filtered_df = df[df["Name"].str.contains(search_query, case=False, na=False)]
