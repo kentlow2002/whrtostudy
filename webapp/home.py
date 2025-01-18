@@ -54,9 +54,6 @@ df = pd.DataFrame(data)
 if "study_spots" not in st.session_state:
     st.session_state.study_spots = df.copy()
 # Streamlit app
-st.title("Study Spots in Singapore")
-
-# Sidebar for navigation and search
 st.title("Welcome to :red[WhrtoStudy] 📚")
 st.header("Find places to study in Singapore! 😎")
 st.subheader("Ready to look for a study spot? 👇")
@@ -70,7 +67,7 @@ else:
 # Display filtered study spots in the sidebar
 #name_list = filtered_df["Name"].tolist()
 for i in filtered_df.index:
-    check = st.checkbox(label=filtered_df.iloc[i]['Name'],value=0,key=i)
+    check = st.checkbox(label=filtered_df.loc[i]['Name'],value=0,key=i)
     if check:
         settings.init()
         settings.selected_spot_name = i

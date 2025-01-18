@@ -86,13 +86,13 @@ def push_seat(spot_name):
         # Create a cursor to execute SQL queries
         cursor = connection.cursor()
 
-        cursor.execute(f"SELECT seated FROM places WHERE id={spot_name}")
+        cursor.execute(f"SELECT seated, seats FROM places WHERE id={spot_name}")
         result = cursor.fetchone()
-        print(result)
-        newCount = result[0]+1
+        if result[0] < result[1]:
+            newCount = result[0]+1
+            cursor.execute(f"UPDATE places SET seated={newCount} WHERE id={spot_name}")
 
         # Example query
-        cursor.execute(f"UPDATE places SET seated={newCount} WHERE id={spot_name}")
 
         # Close the cursor and connection
         connection.commit()
@@ -132,11 +132,10 @@ def pull_seat(spot_name):
 
         cursor.execute(f"SELECT seated FROM places WHERE id={spot_name}")
         result = cursor.fetchone()
-        print(result)
-        newCount = result[0]-1
 
-        # Example query
-        cursor.execute(f"UPDATE places SET seated={newCount} WHERE id={spot_name}")
+        if result[0] > 0:
+            newCount = result[0]-1
+            cursor.execute(f"UPDATE places SET seated={newCount} WHERE id={spot_name}")
 
         # Close the cursor and connection
         connection.commit()
