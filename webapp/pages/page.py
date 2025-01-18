@@ -2,11 +2,10 @@ import streamlit as st
 import pandas as pd
 from PIL import Image
 from streamlit.components.v1 import html
-from home import *
-from settings import *
+#from home import *
+import settings
 
-#if "study_spots" not in st.session_state:
-#    st.session_state.study_spots = df.copy()
+
 if "counter" not in st.session_state:
     st.session_state.counter = True
 
@@ -66,5 +65,6 @@ def display_study_spot(spot):
                 st.error(f"{spot['Name']} is empty!")
 
 # Find the selected study spot and display its details
-selected_spot = st.session_state.study_spots[st.session_state.study_spots["Name"] == settings.selected_spot_name].iloc[0]
+#print(st.session_state.study_spots.iloc[settings.selected_spot_name])
+selected_spot = st.session_state.study_spots.iloc[settings.selected_spot_name]
 display_study_spot(selected_spot)

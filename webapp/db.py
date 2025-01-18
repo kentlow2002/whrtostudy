@@ -34,6 +34,7 @@ def get_all_data():
         #print(result)
         for row in result:
             data.append({})
+            data[-1]['id'] = row[0]
             data[-1]['Name'] = row[2]
             data[-1]['FullAddress'] = row[3]
             data[-1]['CurrentUsers'] = row[4]
@@ -88,7 +89,7 @@ def push_seat(spot_name):
         # Example query
         cursor.execute("SELECT * FROM places")
         result = cursor.fetchmany(5)
-        
+
         # Close the cursor and connection
         cursor.close()
         connection.close()

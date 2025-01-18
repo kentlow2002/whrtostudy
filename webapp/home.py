@@ -47,10 +47,12 @@ data = [
     }
 ]
 
-data = data + get_all_data()
+data = get_all_data()
 
 # Convert data to a pandas DataFrame
 df = pd.DataFrame(data)
+if "study_spots" not in st.session_state:
+    st.session_state.study_spots = df.copy()
 # Streamlit app
 st.title("Study Spots in Singapore")
 
@@ -66,10 +68,10 @@ else:
     filtered_df = df
 
 # Display filtered study spots in the sidebar
-name_list = filtered_df["Name"].tolist()
-for i in range(len(name_list)):
-    check = st.checkbox(label=name_list[i],value=0,key=i)
+#name_list = filtered_df["Name"].tolist()
+for i in filtered_df.index:
+    check = st.checkbox(label=filtered_df.iloc[i]['Name'],value=0,key=i)
     if check:
         settings.init()
-        settings.selected_spot_name = name_list[i]
+        settings.selected_spot_name = i
         st.switch_page("pages/page.py")
