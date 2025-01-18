@@ -74,9 +74,7 @@ else:
 # Display filtered study spots in the sidebar
 #name_list = filtered_df["Name"].tolist()
 for i in filtered_df.index:
-    check = st.checkbox(label=filtered_df.loc[i]['Name'],value=0,key=i)
-    if check:
+    if st.button(label=filtered_df.loc[i]["Name"],use_container_width=True):
         settings.init()
         settings.selected_spot_name = i
-        print(i)
         st.switch_page("pages/page.py")
