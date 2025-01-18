@@ -46,7 +46,7 @@ def get_all_data():
                 data[-1]['Facilities'] += "Toilets"
             if row[10] == True:
                 data[-1]['Facilities'] += "Charging ports"
-
+            data[-1]['Images'] = []
 
         # Close the cursor and connection
         cursor.close()
