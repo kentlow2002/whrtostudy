@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from PIL import Image
 from streamlit.components.v1 import html
-from db import get_all_data
+import settings
 
 # Hardcoded database of study spots
 data = [
@@ -39,16 +39,15 @@ data = [
     }
 ]
 
-data = data + get_all_data()
-
 # Convert data to a pandas DataFrame
 df = pd.DataFrame(data)
-
 # Streamlit app
-st.title("Welcome to :red[WhrtoStudy] :books:")
-st.header("Find places to study in Singapore! :sunglasses:")
-st.subheader("Ready to look for a study spot? :point_down:")
-search_query = st.text_input("",placeholder="Search for a study spot", label_visibility="collapsed")
+st.title("Study Spots in Singapore")
+
+# Sidebar for navigation and search
+st.title("Welcome to WhrStudy!")
+st.subheader("made by Kabil, Kent & Michell")
+search_query = st.text_input("Search for a study spot")
 
 # Filter study spots based on search query
 if search_query:
@@ -59,8 +58,8 @@ else:
 # Display filtered study spots in the sidebar
 name_list = filtered_df["Name"].tolist()
 for i in range(len(name_list)):
-    button = st.button(f"{name_list[i]}",key=i)
-    if button:
-        global selected_spot_name
-        selected_spot_name = name_list[i]
-        #st.switch_page("pages/page.py")
+    check = st.checkbox(label=name_list[i],value=0,key=i)
+    if check:
+        settings.init()
+        settings.selected_spot_name = name_list[i]
+        st.switch_page("pages/page.py")

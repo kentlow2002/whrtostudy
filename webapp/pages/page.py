@@ -2,10 +2,9 @@ import streamlit as st
 import pandas as pd
 from PIL import Image
 from streamlit.components.v1 import html
-import home
 from home import *
+from settings import *
 
-#Use Session State to manage user count
 if "study_spots" not in st.session_state:
     st.session_state.study_spots = df.copy()
 if "counter" not in st.session_state:
@@ -65,7 +64,5 @@ def display_study_spot(spot):
                 st.error(f"{spot['Name']} is empty!")
 
 # Find the selected study spot and display its details
-selected_spot = st.session_state.study_spots[
-    st.session_state.study_spots["Name"] == selected_spot_name
-].iloc[0]
+selected_spot = st.session_state.study_spots[st.session_state.study_spots["Name"] == settings.selected_spot_name].iloc[0]
 display_study_spot(selected_spot)
