@@ -7,6 +7,13 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+left,middle,right = st.columns(3)
+if left.button(label="About",use_container_width=True):
+    st.switch_page("pages/about.py")
+middle.link_button(label="Github",url="https://github.com/kentlow2002/whrtostudy",use_container_width=True)
+if right.button(label="Home",use_container_width=True):
+    st.switch_page("home.py")
+
 st.title("About Us")
 st.header("Made for :red[students] by :red[students] :student:")
 st.balloons()

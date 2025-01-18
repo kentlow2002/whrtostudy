@@ -54,6 +54,12 @@ df = pd.DataFrame(data)
 if "study_spots" not in st.session_state:
     st.session_state.study_spots = df.copy()
 # Streamlit app
+left,middle,right = st.columns(3)
+if left.button(label="About",use_container_width=True):
+    st.switch_page("pages/about.py")
+middle.link_button(label="Github",url="https://github.com/kentlow2002/whrtostudy",use_container_width=True)
+if right.button(label="Home",use_container_width=True):
+    st.switch_page("home.py")
 st.title("Welcome to :red[WhrtoStudy] 📚")
 st.header("Find places to study in Singapore! 😎")
 st.subheader("Ready to look for a study spot? 👇")
