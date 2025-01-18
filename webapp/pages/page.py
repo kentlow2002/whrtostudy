@@ -79,7 +79,7 @@ def display_study_spot(spot):
 
 # Find the selected study spot and display its details
 #print(st.session_state.study_spots.iloc[settings.selected_spot_name])
-selected_spot = st.session_state.study_spots.iloc[settings.selected_spot_name]
+selected_spot = st.session_state.study_spots.loc[settings.selected_spot_name]
 left,middle,right = st.columns(3)
 if left.button(label="About",use_container_width=True):
     st.switch_page("pages/about.py")

@@ -50,7 +50,7 @@ data = [
 data = get_all_data()
 
 # Convert data to a pandas DataFrame
-df = pd.DataFrame(data)
+df = pd.DataFrame(data).sort_values(by=['Name'])
 if "study_spots" not in st.session_state:
     st.session_state.study_spots = df.copy()
 # Streamlit app
