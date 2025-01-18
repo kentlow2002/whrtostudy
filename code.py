@@ -85,9 +85,15 @@ def display_study_spot(spot):
         <div style='display: flex; overflow-x: auto; gap: 10px;'>
         """
         for image_url in spot["Images"]:
-            carousel_html += f"<div style='min-width: 300px;'><img src='{image_url}' alt='Image' style='width: 100%; border: 1px solid #ddd; border-radius: 4px;'></div>"
+            # Standardize image size to 300x200
+            carousel_html += f"""
+            <div style='min-width: 300px;'>
+                <img src='{image_url}' alt='Image' 
+                     style='width: 300px; height: 200px; object-fit: cover; border: 1px solid #ddd; border-radius: 4px;'>
+            </div>
+            """
         carousel_html += "</div>"
-        html(carousel_html, height=300)
+        html(carousel_html, height=240)  # Adjust the height to match the image size
 
     # Interactive buttons for user presence
     col1, col2 = st.columns(2)
@@ -113,7 +119,7 @@ def display_study_spot(spot):
                 if not st.session_state.counter:
                     st.session_state.study_spots.at[index, "CurrentUsers"] -= 1
                     st.session_state.counter = True
-                    st.error("Sucessfully Updated!")
+                    st.error("Successfully Updated!")
                 else:
                     st.error("How can you leave a place you never entered?")
             else:
@@ -125,3 +131,4 @@ selected_spot = st.session_state.study_spots[
     st.session_state.study_spots["Name"] == selected_spot_name
 ].iloc[0]
 display_study_spot(selected_spot)
+ # type: ignore
