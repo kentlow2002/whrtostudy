@@ -5,6 +5,13 @@ from streamlit.components.v1 import html
 import settings
 from db import get_all_data
 
+st.set_page_config(
+    page_title="WhrtoStudy",
+    page_icon=":books:",
+    layout="centered",
+    initial_sidebar_state="collapsed"
+)
+
 # Hardcoded database of study spots
 data = [
     {
