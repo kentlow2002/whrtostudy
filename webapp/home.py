@@ -45,12 +45,10 @@ data = data + get_all_data()
 df = pd.DataFrame(data)
 
 # Streamlit app
-st.title("Study Spots in Singapore")
-
-# Sidebar for navigation and search
-st.title("Welcome to WhrStudy!")
-st.subheader("made by Kabil, Kent & Michell")
-search_query = st.text_input("Search for a study spot")
+st.title("Welcome to :red[WhrtoStudy] :books:")
+st.header("Find places to study in Singapore! :sunglasses:")
+st.subheader("Ready to look for a study spot? :point_down:")
+search_query = st.text_input("",placeholder="Search for a study spot", label_visibility="collapsed")
 
 # Filter study spots based on search query
 if search_query:
