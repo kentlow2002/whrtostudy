@@ -100,7 +100,8 @@ df = pd.DataFrame(data)
 st.title("Study Spots in Singapore")
 
 # Sidebar for navigation and search
-st.title("Navigation")
+st.title("Welcome to WhrStudy!")
+st.subheader("made by Kabil, Kent & Michell")
 search_query = st.text_input("Search for a study spot")
 
 # Filter study spots based on search query
@@ -113,14 +114,7 @@ else:
 name_list = filtered_df["Name"].tolist()
 for i in range(len(name_list)):
     button = st.button(f"{name_list[i]}",key=i)
-    if button:
-        selected_spot_name = name_list[i]
-        break
-
-#Use Session State to manage user count
-if "study_spots" not in st.session_state:
-    st.session_state.study_spots = df.copy()
-if "counter" not in st.session_state:
-    st.session_state.counter = True
-
-st.switch_page(f"pages/page.py")
+if button:
+    global selected_spot_name
+    selected_spot_name = name_list[i]
+    st.switch_page("pages/page.py")
