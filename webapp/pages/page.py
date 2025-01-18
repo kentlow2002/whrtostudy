@@ -4,7 +4,7 @@ from PIL import Image
 from streamlit.components.v1 import html
 #from home import *
 import settings
-from db import push_seat, pull_seat
+from db import push_seat, pull_seat, get_all_data
 
 st.set_page_config(
     page_title="Studying here?",
@@ -13,6 +13,8 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+if "study_spots" not in st.session_state:
+    st.switch_page('home.py')
 if "counter" not in st.session_state:
     st.session_state.counter = True
 
