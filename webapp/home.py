@@ -12,6 +12,8 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+settings.selected_spot_name = 0
+
 # Hardcoded database of study spots
 data = [
     {
@@ -50,9 +52,8 @@ data = [
 data = get_all_data()
 
 # Convert data to a pandas DataFrame
-df = pd.DataFrame(data).sort_values(by=['Name'])
-if "study_spots" not in st.session_state:
-    st.session_state.study_spots = df.copy()
+df = pd.DataFrame(data)
+st.session_state.study_spots = df.copy()
 # Streamlit app
 left,middle,right = st.columns(3)
 if left.button(label="About",use_container_width=True):
@@ -73,8 +74,7 @@ else:
 # Display filtered study spots in the sidebar
 #name_list = filtered_df["Name"].tolist()
 for i in filtered_df.index:
-    check = st.checkbox(label=filtered_df.loc[i]['Name'],value=0,key=i)
-    if check:
+    if st.button(label=filtered_df.loc[i]["Name"],use_container_width=True):
         settings.init()
         settings.selected_spot_name = i
         st.switch_page("pages/page.py")

@@ -42,9 +42,9 @@ def get_all_data():
             data[-1]['LatLng'] = str(row[6]) +', ' + str(row[7])
             data[-1]['Facilities'] = ""
             if row[8] == True:
-                data[-1]['Facilities'] += "WiFi"
+                data[-1]['Facilities'] += "WiFi\t|\t"
             if row[9] == True:
-                data[-1]['Facilities'] += "Toilets"
+                data[-1]['Facilities'] += "Toilets\t|\t"
             if row[10] == True:
                 data[-1]['Facilities'] += "Charging ports"
             data[-1]['Images'] = []
@@ -103,6 +103,8 @@ def push_seat(spot_name):
     except Exception as e:
         print(f"Failed to connect: {e}")
 
+    return newCount
+
 def pull_seat(spot_name):
 
     data = []
@@ -146,4 +148,5 @@ def pull_seat(spot_name):
     except Exception as e:
         print(f"Failed to connect: {e}")
 
+    return newCount
           

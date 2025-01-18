@@ -23,7 +23,8 @@ def display_study_spot(spot):
     counter = True
     st.subheader(spot["Name"])
     st.write(f"**Capacity:** {spot['Capacity']} people")
-    st.write(f"**Current Users:** {spot['CurrentUsers']} people")
+    currentUsers = st.empty()
+    currentUsers.write(f"**Current Users:** {spot['CurrentUsers']} people")
     st.write(f"**Facilities:** {spot['Facilities']}")
     st.write(f"**Address:** {spot['FullAddress']}")
 
@@ -54,7 +55,7 @@ def display_study_spot(spot):
             ].index[0]
             if st.session_state.counter and settings.commit:
                 st.session_state.study_spots.at[index, "CurrentUsers"] += 1
-                push_seat(spot_name=spot['id'])
+                currentUsers.write(f"**Current Users:** {push_seat(spot_name=spot['id'])} people")
                 st.session_state.counter = False
                 settings.commit = 0
                 st.error(f"Successfully Updated!")
@@ -68,7 +69,7 @@ def display_study_spot(spot):
             if st.session_state.study_spots.at[index, "CurrentUsers"] > 0:
                 if not st.session_state.counter and not settings.commit:
                     st.session_state.study_spots.at[index, "CurrentUsers"] -= 1
-                    pull_seat(spot_name=spot['id'])
+                    currentUsers.write(f"**Current Users:** {pull_seat(spot_name=spot['id'])} people")
                     st.session_state.counter = True
                     settings.commit = 1
                     st.error("Sucessfully Updated!")
@@ -79,6 +80,7 @@ def display_study_spot(spot):
 
 # Find the selected study spot and display its details
 #print(st.session_state.study_spots.iloc[settings.selected_spot_name])
+print(settings.selected_spot_name)
 selected_spot = st.session_state.study_spots.loc[settings.selected_spot_name]
 left,middle,right = st.columns(3)
 if left.button(label="About",use_container_width=True):
