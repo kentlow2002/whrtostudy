@@ -30,7 +30,7 @@ def get_all_data():
 
         # Example query
         cursor.execute("SELECT * FROM places")
-        result = cursor.fetchmany(5)
+        result = cursor.fetchmany(10)
         #print(result)
         for row in result:
             data.append({})
