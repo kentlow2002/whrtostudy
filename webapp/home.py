@@ -54,9 +54,6 @@ df = pd.DataFrame(data)
 if "study_spots" not in st.session_state:
     st.session_state.study_spots = df.copy()
 # Streamlit app
-st.title("Study Spots in Singapore")
-
-# Sidebar for navigation and search
 st.title("Welcome to :red[WhrtoStudy] 📚")
 st.header("Find places to study in Singapore! 😎")
 st.subheader("Ready to look for a study spot? 👇")
