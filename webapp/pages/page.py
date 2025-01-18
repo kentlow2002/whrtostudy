@@ -5,8 +5,8 @@ from streamlit.components.v1 import html
 from home import *
 from settings import *
 
-if "study_spots" not in st.session_state:
-    st.session_state.study_spots = df.copy()
+#if "study_spots" not in st.session_state:
+#    st.session_state.study_spots = df.copy()
 if "counter" not in st.session_state:
     st.session_state.counter = True
 
@@ -42,9 +42,10 @@ def display_study_spot(spot):
             index = st.session_state.study_spots[
                 st.session_state.study_spots["Name"] == spot["Name"]
             ].index[0]
-            if st.session_state.counter:
+            if st.session_state.counter and settings.commit:
                 st.session_state.study_spots.at[index, "CurrentUsers"] += 1
                 st.session_state.counter = False
+                settings.commit = 0
                 st.error(f"Successfully Updated!")
             else:
                 st.error("Please stop spamming!")
@@ -54,9 +55,10 @@ def display_study_spot(spot):
                 st.session_state.study_spots["Name"] == spot["Name"]
             ].index[0]
             if st.session_state.study_spots.at[index, "CurrentUsers"] > 0:
-                if not st.session_state.counter:
+                if not st.session_state.counter and not settings.commit:
                     st.session_state.study_spots.at[index, "CurrentUsers"] -= 1
                     st.session_state.counter = True
+                    settings.commit = 0
                     st.error("Sucessfully Updated!")
                 else:
                     st.error("How can you leave a place you never entered?")
