@@ -22,6 +22,3 @@ st.link_button("LinkedIn", "https://streamlit.io/gallery")
 
 st.subheader("Michell :artist:")
 st.link_button("LinkedIn", "https://www.linkedin.com/in/michelltansq/")
-
-st.subheader("Github Repo")
-st.link_button("Github", "https://github.com/kentlow2002/whrtostudy")
