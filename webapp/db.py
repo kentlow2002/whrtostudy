@@ -86,14 +86,65 @@ def push_seat(spot_name):
         # Create a cursor to execute SQL queries
         cursor = connection.cursor()
 
+        cursor.execute(f"SELECT seated FROM places WHERE id={spot_name}")
+        result = cursor.fetchone()
+        print(result)
+        newCount = result[0]+1
+
         # Example query
-        cursor.execute("SELECT * FROM places")
-        result = cursor.fetchmany(5)
+        cursor.execute(f"UPDATE places SET seated={newCount} WHERE id={spot_name}")
 
         # Close the cursor and connection
+        connection.commit()
         cursor.close()
         connection.close()
         #print("Connection closed.")
 
     except Exception as e:
         print(f"Failed to connect: {e}")
+
+def pull_seat(spot_name):
+
+    data = []
+    # Load environment variables from .env
+    load_dotenv()
+
+    # Fetch variables
+    USER = os.getenv("user")
+    PASSWORD = os.getenv("password")
+    HOST = os.getenv("host")
+    PORT = os.getenv("port")
+    DBNAME = os.getenv("dbname")
+
+    # Connect to the database
+    try:
+        connection = psycopg2.connect(
+            user=USER,
+            password=PASSWORD,
+            host=HOST,
+            port=PORT,
+            dbname=DBNAME
+        )
+        #print("Connection successful!")
+
+        # Create a cursor to execute SQL queries
+        cursor = connection.cursor()
+
+        cursor.execute(f"SELECT seated FROM places WHERE id={spot_name}")
+        result = cursor.fetchone()
+        print(result)
+        newCount = result[0]-1
+
+        # Example query
+        cursor.execute(f"UPDATE places SET seated={newCount} WHERE id={spot_name}")
+
+        # Close the cursor and connection
+        connection.commit()
+        cursor.close()
+        connection.close()
+        #print("Connection closed.")
+
+    except Exception as e:
+        print(f"Failed to connect: {e}")
+
+          

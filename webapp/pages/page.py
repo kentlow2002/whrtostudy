@@ -4,6 +4,7 @@ from PIL import Image
 from streamlit.components.v1 import html
 #from home import *
 import settings
+from db import push_seat, pull_seat
 
 st.set_page_config(
     page_title="Studying here?",
@@ -51,6 +52,7 @@ def display_study_spot(spot):
             ].index[0]
             if st.session_state.counter and settings.commit:
                 st.session_state.study_spots.at[index, "CurrentUsers"] += 1
+                push_seat(spot_name=spot['id'])
                 st.session_state.counter = False
                 settings.commit = 0
                 st.error(f"Successfully Updated!")
@@ -64,8 +66,9 @@ def display_study_spot(spot):
             if st.session_state.study_spots.at[index, "CurrentUsers"] > 0:
                 if not st.session_state.counter and not settings.commit:
                     st.session_state.study_spots.at[index, "CurrentUsers"] -= 1
+                    pull_seat(spot_name=spot['id'])
                     st.session_state.counter = True
-                    settings.commit = 0
+                    settings.commit = 1
                     st.error("Sucessfully Updated!")
                 else:
                     st.error("How can you leave a place you never entered?")
