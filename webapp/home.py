@@ -67,7 +67,7 @@ else:
 # Display filtered study spots in the sidebar
 #name_list = filtered_df["Name"].tolist()
 for i in filtered_df.index:
-    check = st.checkbox(label=filtered_df.iloc[i]['Name'],value=0,key=i)
+    check = st.checkbox(label=filtered_df.loc[i]['Name'],value=0,key=i)
     if check:
         settings.init()
         settings.selected_spot_name = i
