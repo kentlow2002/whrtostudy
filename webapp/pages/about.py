@@ -22,10 +22,10 @@ st.subheader("Code 606 @ Hack&Roll 2025")
 st.subheader("Team Members:")
 
 st.subheader("Kent :mechanic:")
-st.link_button("LinkedIn", "https://streamlit.io/gallery")
+st.link_button("LinkedIn", "https://www.linkedin.com/in/kent-low-09b383186/")
 
 st.subheader("Kabil :cook:")
-st.link_button("LinkedIn", "https://streamlit.io/gallery")
+st.link_button("LinkedIn", "https://www.linkedin.com/in/kabileswaran")
 
 st.subheader("Michell :artist:")
 st.link_button("LinkedIn", "https://www.linkedin.com/in/michelltansq/")
