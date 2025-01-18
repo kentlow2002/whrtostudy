@@ -4,6 +4,7 @@ from PIL import Image
 from streamlit.components.v1 import html
 from dotenv import load_dotenv
 import os
+import psycopg2
 
 # Load environment variables from .env
 load_dotenv()
@@ -59,7 +60,7 @@ try:
         port=PORT,
         dbname=DBNAME
     )
-    print("Connection successful!")
+    #print("Connection successful!")
     
     # Create a cursor to execute SQL queries
     cursor = connection.cursor()
@@ -67,7 +68,7 @@ try:
     # Example query
     cursor.execute("SELECT * FROM places")
     result = cursor.fetchmany(5)
-    print(result)
+    #print(result)
     for row in result:
         data.append({})
         data[-1]['Name'] = row[2]
@@ -87,7 +88,7 @@ try:
     # Close the cursor and connection
     cursor.close()
     connection.close()
-    print("Connection closed.")
+    #print("Connection closed.")
 
 except Exception as e:
     print(f"Failed to connect: {e}")
