@@ -1,2 +1,2 @@
-# autopharm
+# whrtostudy
 HacknRoll 2025
