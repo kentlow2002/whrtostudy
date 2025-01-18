@@ -2,7 +2,14 @@ import streamlit as st
 import pandas as pd
 from PIL import Image
 from streamlit.components.v1 import html
+import home
 from home import *
+
+#Use Session State to manage user count
+if "study_spots" not in st.session_state:
+    st.session_state.study_spots = df.copy()
+if "counter" not in st.session_state:
+    st.session_state.counter = True
 
 # Function to display the study spot details
 def display_study_spot(spot):
@@ -42,7 +49,6 @@ def display_study_spot(spot):
                 st.error(f"Successfully Updated!")
             else:
                 st.error("Please stop spamming!")
-            print(st.session_state)
     with col2:
         if st.button(f"I'm leaving ({spot['Name']})"):
             index = st.session_state.study_spots[
@@ -57,7 +63,6 @@ def display_study_spot(spot):
                     st.error("How can you leave a place you never entered?")
             else:
                 st.error(f"{spot['Name']} is empty!")
-            print(st.session_state)
 
 # Find the selected study spot and display its details
 selected_spot = st.session_state.study_spots[
