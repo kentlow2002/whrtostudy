@@ -31,7 +31,7 @@ def display_study_spot(spot):
     # Map showing the location of the study spot with a marker
     lat, lon = map(float, spot["LatLng"].split(", "))
     map_data = pd.DataFrame({"lat": [lat], "lon": [lon]})
-    st.map(map_data, zoom=15, use_container_width=True)
+    st.map(map_data, zoom=15, use_container_width=True, height=350)
 
     st.write("**Images:**")
     if spot["Images"]:
