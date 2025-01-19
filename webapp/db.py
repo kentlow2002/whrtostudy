@@ -54,7 +54,6 @@ def get_all_data():
             if data[-1]['Facilities'] == "":
                 data[-1]['Facilities'] = "None"
             data[-1]['Images'] = []
-            print(row)
 
         # Close the cursor and connection
         cursor.close()
@@ -195,6 +194,46 @@ def push_spot(name, address, capacity, wifi, toilet, charging):
         currentDatetime = datetime.now(timezone.utc)
 
         cursor.execute(f"INSERT INTO places VALUES ({result[0]+1}, '{currentDatetime}', '{name}', '{address}', 0, '{capacity}', {geoloc[0]['lat']}, {geoloc[0]['lon']}, {wifi}, {toilet}, {charging});")
+
+        # Close the cursor and connection
+        connection.commit()
+        cursor.close()
+        connection.close()
+        #print("Connection closed.")
+
+    except Exception as e:
+        print(e)
+
+def push_email(sender, subject, msg):
+    # Load environment variables from .env
+    load_dotenv()
+
+    # Fetch variables
+    USER = os.getenv("user")
+    PASSWORD = os.getenv("password")
+    HOST = os.getenv("host")
+    PORT = os.getenv("port")
+    DBNAME = os.getenv("dbname")
+
+    # Connect to the database
+    try:
+        connection = psycopg2.connect(
+            user=USER,
+            password=PASSWORD,
+            host=HOST,
+            port=PORT,
+            dbname=DBNAME
+        )
+        #print("Connection successful!")
+
+        # Create a cursor to execute SQL queries
+        cursor = connection.cursor()
+
+        #cursor.execute(f"SELECT  FROM feedback")
+        #result = cursor.fetchone()
+        #currentDatetime = datetime.now(timezone.utc)
+
+        cursor.execute(f"INSERT INTO feedback (sender, subject, msg) VALUES ('{sender}', '{subject}', '{msg}');")
 
         # Close the cursor and connection
         connection.commit()

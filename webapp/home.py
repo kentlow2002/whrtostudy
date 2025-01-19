@@ -71,6 +71,8 @@ if search_query:
 else:
     filtered_df = df
 
+filtered_df.sort_values(by="Name", inplace=True)
+
 # Display filtered study spots in the sidebar
 #name_list = filtered_df["Name"].tolist()
 for i in filtered_df.index:

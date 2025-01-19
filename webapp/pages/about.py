@@ -1,4 +1,5 @@
 import streamlit as st
+from db import push_email
 
 st.set_page_config(
     page_title="About Us",
@@ -62,15 +63,8 @@ with st.form("message_form"):
             body = f"Category: {category}\n\nMessage:\n{message}\n\n"
             if email:
                 body += f"User's Email: {email}"
-            email_message.attach(MIMEText(body, "plain"))
+                push_email(email, subject, body)
+            else:
+                push_email('anonymous', subject, body)
 
-            try:
-                with smtplib.SMTP("smtp.gmail.com", 587) as server:
-                    server.starttls()
-                    server.login(sender_email, sender_password)
-                    server.sendmail(
-                        sender_email, recipient_email, email_message.as_string()
-                    )
-                st.success("Your message has been sent successfully!")
-            except Exception as e:
-                st.error(f"Failed to send the message. Error: {e}")
+            st.success("We welcome feedback with open arms 🤗")
