@@ -3,7 +3,7 @@ import pandas as pd
 from PIL import Image
 from streamlit.components.v1 import html
 import settings
-from db import get_all_data
+from db import get_all_data, push_spot
 
 st.set_page_config(
     page_title="WhrtoStudy",
@@ -78,3 +78,59 @@ for i in filtered_df.index:
         settings.init()
         settings.selected_spot_name = i
         st.switch_page("pages/page.py")
+
+st.header("Couldn't find your favourite study spot? 🤷‍♀️")
+st.subheader("Let us know! 👇")
+
+# Create a form for input
+with st.form("study_spot_form"):
+    # Input fields
+    name = st.text_input("Name of the Study Spot", placeholder="Enter the name of the study spot")
+    address = st.text_area("Address", placeholder="Enter the full address of the study spot")
+    capacity = st.number_input("Capacity", min_value=1, step=1, help="Maximum number of people the spot can accommodate")
+
+    # Checkbox for facilities
+    st.write("Facilities:")
+    wifi = st.checkbox("WiFi")
+    toilet = st.checkbox("Toilet")
+    charging_ports = st.checkbox("Charging ports")
+
+    # File uploader for images (optional)
+    images = st.file_uploader(
+        "Images (Optional)", 
+        type=["png", "jpg", "jpeg"], 
+        accept_multiple_files=True,
+        help="Upload images of the study spot"
+    )
+
+    # Submit button
+    submitted = st.form_submit_button("Submit")
+
+    if submitted:
+        if not name or not address:
+            st.error("Please fill in the required fields: Name and Address.")
+        else:
+            # Collect the facilities selected
+            facilities = []
+            if wifi:
+                facilities.append("WiFi")
+            if toilet:
+                facilities.append("Toilet")
+            if charging_ports:
+                facilities.append("Charging Ports")
+
+            # Display the submitted data
+
+            push_spot(name, address, capacity, wifi, toilet, charging_ports)
+
+            st.success("Study Spot Submitted Successfully!")
+            st.write("### Details of the Study Spot")
+            st.write(f"**Name:** {name}")
+            st.write(f"**Address:** {address}")
+            st.write(f"**Capacity:** {capacity} people")
+            st.write(f"**Facilities:** {', '.join(facilities) if facilities else 'None'}")
+
+            if images:
+                st.write("**Uploaded Images:**")
+                for image in images:
+                    st.image(image, caption=image.name, use_column_width=True)
