@@ -51,6 +51,8 @@ def get_all_data():
                 data[-1]['Facilities'] += "\t|Toilets\t"
             if row[10] == True:
                 data[-1]['Facilities'] += "\t|Charging ports"
+            if data[-1]['Facilities'] == "":
+                data[-1]['Facilities'] = "None"
             data[-1]['Images'] = []
             print(row)
 
