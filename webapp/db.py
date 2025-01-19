@@ -1,6 +1,10 @@
 from dotenv import load_dotenv
 import os
 import psycopg2
+import requests
+import urllib.parse
+import random
+from datetime import datetime, timezone
 
 def get_all_data():
     data = []
@@ -48,6 +52,7 @@ def get_all_data():
             if row[10] == True:
                 data[-1]['Facilities'] += "Charging ports"
             data[-1]['Images'] = []
+            print(row)
 
         # Close the cursor and connection
         cursor.close()
@@ -152,3 +157,48 @@ def pull_seat(spot_name):
 
     return newCount
           
+
+def push_spot(name, address, capacity, wifi, toilet, charging):
+    # Load environment variables from .env
+    load_dotenv()
+
+    # Fetch variables
+    USER = os.getenv("user")
+    PASSWORD = os.getenv("password")
+    HOST = os.getenv("host")
+    PORT = os.getenv("port")
+    DBNAME = os.getenv("dbname")
+
+    # Connect to the database
+    try:
+        connection = psycopg2.connect(
+            user=USER,
+            password=PASSWORD,
+            host=HOST,
+            port=PORT,
+            dbname=DBNAME
+        )
+        #print("Connection successful!")
+
+        url = 'http://nominatim.openstreetmap.org/search?q=' + urllib.parse.quote(address) +'&format=json'
+        headers = {'user-agent': 'streamlit'}
+        
+        geoloc = requests.get(url, headers=headers).json()
+
+        # Create a cursor to execute SQL queries
+        cursor = connection.cursor()
+
+        cursor.execute(f"SELECT MAX(id) FROM places")
+        result = cursor.fetchone()
+        currentDatetime = datetime.now(timezone.utc)
+
+        cursor.execute(f"INSERT INTO places VALUES ({result[0]+1}, '{currentDatetime}', '{name}', '{address}', 0, '{capacity}', {geoloc[0]['lat']}, {geoloc[0]['lon']}, {wifi}, {toilet}, {charging});")
+
+        # Close the cursor and connection
+        connection.commit()
+        cursor.close()
+        connection.close()
+        #print("Connection closed.")
+
+    except Exception as e:
+        print(e)

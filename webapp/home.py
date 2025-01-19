@@ -3,7 +3,7 @@ import pandas as pd
 from PIL import Image
 from streamlit.components.v1 import html
 import settings
-from db import get_all_data
+from db import get_all_data, push_spot
 
 st.set_page_config(
     page_title="WhrtoStudy",
@@ -120,6 +120,9 @@ with st.form("study_spot_form"):
                 facilities.append("Charging Ports")
 
             # Display the submitted data
+
+            push_spot(name, address, capacity, wifi, toilet, charging_ports)
+
             st.success("Study Spot Submitted Successfully!")
             st.write("### Details of the Study Spot")
             st.write(f"**Name:** {name}")
