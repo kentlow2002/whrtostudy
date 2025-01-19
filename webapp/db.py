@@ -46,11 +46,11 @@ def get_all_data():
             data[-1]['LatLng'] = str(row[6]) +', ' + str(row[7])
             data[-1]['Facilities'] = ""
             if row[8] == True:
-                data[-1]['Facilities'] += "WiFi\t|\t"
+                data[-1]['Facilities'] += "WiFi\t"
             if row[9] == True:
-                data[-1]['Facilities'] += "Toilets\t|\t"
+                data[-1]['Facilities'] += "\t|Toilets\t"
             if row[10] == True:
-                data[-1]['Facilities'] += "Charging ports"
+                data[-1]['Facilities'] += "\t|Charging ports"
             data[-1]['Images'] = []
             print(row)
 
