@@ -1,5 +1,5 @@
 [client]
-showSidebarNav = false
+showSidebarNavigation = false
 toolbarMode = "minimal"
 
 
