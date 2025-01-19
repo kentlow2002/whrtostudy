@@ -7,7 +7,7 @@ Being a student, we felt frustrated when we go to our usual study spot and find 
 ## What it does
 WhrtoStudy lets students see study spots around the island and check how many people are already present at the study spot. The platform also lets students check if there are facilities nearby, such as toilets, WiFi, and charging ports.
 
-## How we built it
+## Our Tech Stack
 Built with:
 * Python using Streamlit framework
 * Supabase database platform
