@@ -19,13 +19,13 @@ Built with:
 
 ## Accomplishments that we're proud of
 * Attempting a hackathon for the first time
-* * Producing something that works in 24 hours
+  * Producing something that works in 24 hours
 
 ## What we learned
 * Time is best spent exploring and refining what idea you would like to develop, especially when under time constraints
 * Rapid prototyping principles are essential to expedite the completion of the Minimum Viable Product (MVP)
-  * * Focus on the core features of the MVP that need to be done before adding non-essential features
-  * * Deploy often to test faster and "fail" faster, which allows for quicker refinements
+  * Focus on the core features of the MVP that need to be done before adding non-essential features
+  * Deploy often to test faster and "fail" faster, which allows for quicker refinements
 
 ## What's next for WhrtoStudy
 Future developments include:
