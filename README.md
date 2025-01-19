@@ -14,18 +14,23 @@ Built with:
 * and most importantly, love
 
 ## Challenges we ran into
-Weird glitches from pressing/clicking buttons too quickly
-Trying to integrate the frontend with backend database
+* Weird glitches from pressing/clicking buttons too quickly
+* Trying to integrate the frontend with backend database
 
 ## Accomplishments that we're proud of
-Attempting a hackathon for the first time
-Producing something that works in 24 hours
+* Attempting a hackathon for the first time
+* * Producing something that works in 24 hours
 
 ## What we learned
-Time is best spent exploring and refining what idea you would like to develop, especially when under time constraints. Rapid prototyping principles are essential to expedite the completion of the Minimum Viable Product (MVP) - eg. focus on the core features of the MVP that need to be done before adding non-essential features, deploy often to test faster and "fail" faster, which allows for quicker refinements
+* Time is best spent exploring and refining what idea you would like to develop, especially when under time constraints
+* Rapid prototyping principles are essential to expedite the completion of the Minimum Viable Product (MVP)
+  * * Focus on the core features of the MVP that need to be done before adding non-essential features
+  * * Deploy often to test faster and "fail" faster, which allows for quicker refinements
 
 ## What's next for WhrtoStudy
-Future developments include adding more study spots, implementing analytics such as an hourly trend of every study spot so students know when it's crowded.
-Use other technologies that can better handle high loads.
-Improve the UI/UX
-Idiot proof the buttons.
+Future developments include:
+* Adding more study spots
+* Implementing analytics such as an hourly trend of every study spot so students know when it's crowded
+* Use other technologies that can better handle high loads
+* Improve the UI/UX
+* Idiot proof the buttons.
