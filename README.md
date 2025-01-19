@@ -1,7 +1,5 @@
 # WhrtoStudy
-HacknRoll 2025
-
-Built by Kabil, Mitchell and Kent
+Built by Kabil, Mitchell and Kent during NUS HacknRoll 2025 from 18/01/2025 1215 (GMT +8) - 19/01/2025 1215 (GMT +8)
 
 ## Inspiration
 Being a student, we felt frustrated when we go to our usual study spot and find it swarmed with too many people. We would then have to waste time finding another spot to study, with no guarantee that there would be seats available for us.
