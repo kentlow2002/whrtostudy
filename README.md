@@ -2,7 +2,7 @@
 Built by Kabil, Mitchell and Kent during NUS HacknRoll 2025 from 18/01/2025 1215 (GMT +8) - 19/01/2025 1215 (GMT +8)
 
 ## Inspiration
-Being a student, we felt frustrated when we go to our usual study spot and find it swarmed with too many people. We would then have to waste time finding another spot to study, with no guarantee that there would be seats available for us.
+As students, we felt frustrated when we go to our usual study spot and find it swarmed with too many people. We would then have to waste time finding another spot to study, with no guarantee that there would be seats available for us.
 
 ## What it does
 WhrtoStudy lets students see study spots around the island and check how many people are already present at the study spot. The platform also lets students check if there are facilities nearby, such as toilets, WiFi, and charging ports.
